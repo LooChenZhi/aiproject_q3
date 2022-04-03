@@ -318,7 +318,7 @@ st.pyplot(fig5)
 
 
 # loop from 1 to 10 to find the best k value
-st.write(""" #Find the best K value""")
+st.write("""# Find the best K value""")
 distortions = []
 for i in range (1, 11):
     km = KMeans(
