@@ -77,7 +77,8 @@ st.dataframe(cate.astype(str))
 # Find Correlation relationship between all columns 
 
 st.subheader("Correlation Heatmap")
-fig1 = sns.set(rc = {'figure.figsize':(20,10)})
+fig1 = plt.figure()
+sns.set(rc = {'figure.figsize':(20,10)})
 sns.heatmap(df.corr().round(3), annot = True)
 st.pyplot(fig1)
 
@@ -112,7 +113,8 @@ st.markdown("To check whether all categorical data have changed to numerical dat
 # Correlations Heatmap after Preprocessing Data
 
 st.markdown(" Correlations Heatmap after Preprocessing Data")
-fig2 = sns.set(rc = {'figure.figsize':(20,15)})
+fig2 = plt.figure()
+sns.set(rc = {'figure.figsize':(20,15)})
 sns.heatmap(clean_df.corr().round(3), annot = True)
 st.pyplot(fig2)
 st.markdown("Now, all classes have been have been ready for analyze")
@@ -169,7 +171,7 @@ y_pred = nb.predict(X_test)
 
 # accuracy
 nb.score(X_test, y_test)
-st.markdown("Accuracy for Classifications 1 : Naive Bayes -> ", nb.score(X_test, y_test))
+st.write("Accuracy for Classifications 1 : Naive Bayes -> ", nb.score(X_test, y_test))
 
 
 # Confusion Matrix
@@ -306,6 +308,7 @@ merge_data = merge_data[km_data.columns]
 merge_data["Clusters"] = km.labels_
 
 # compare the differences before and after
-ax =sns.scatterplot(x="Years_to_Financial_Freedom", y="Monthly_Salary", hue = "Clusters", data = merge_data)
+ax = plt.figure()
+sns.scatterplot(x="Years_to_Financial_Freedom", y="Monthly_Salary", hue = "Clusters", data = merge_data)
 
 st.pyplot(ax)
