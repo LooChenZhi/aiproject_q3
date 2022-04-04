@@ -112,7 +112,7 @@ st.markdown("To check whether all categorical data have changed to numerical dat
 
 # Correlations Heatmap after Preprocessing Data
 
-st.markdown(" Correlations Heatmap after Preprocessing Data")
+st.subheader(" Correlations Heatmap after Preprocessing Data")
 fig2 = plt.figure()
 sns.set(rc = {'figure.figsize':(20,15)})
 sns.heatmap(clean_df.corr().round(3), annot = True)
@@ -293,7 +293,7 @@ plt.show()
 st.pyplot(fig6)
 
 st.markdown("From the line graph above, we can see that the elbow point is at 5. Number of clusters = 5.")
-st.markdown("*******Adjust the **Number of Clusters (k)** in the sidebar and investigate the scatter plot again.")
+st.write("**Adjust the **Number of Clusters (k)** in the sidebar and investigate the scatter plot again.**")
 
 
 ######################################clus_k###################################
