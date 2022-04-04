@@ -16,7 +16,6 @@ from sklearn.metrics import confusion_matrix
 
 st.title("Question 3: Loan Application Modelling")
 
-############################################################User sidebar#######################
 st.sidebar.header("User Input")
 train_ratio = st.sidebar.slider("Training Set Ratio", min_value = 0.1, max_value = 1.0, value = 0.7, step = 0.1)
 k_cluster = st.sidebar.slider("Number of Clusters (k)", min_value = 1, max_value = 10, value = 5, step = 1)
@@ -26,7 +25,6 @@ data = {"train_ratio" : train_ratio,
 
 test_ratio = round((1 - train_ratio), 1)
 k_cluster = int(k_cluster)
-############################################################User sidebar#######################
 
 
 # About the Dataset
@@ -38,7 +36,7 @@ st.write(df)
 
 # Dataset Info/ Dimensions
 #Check dataset's info
-st.markdown("Check dataset info")
+st.subheader("Check dataset info")
 buffer = io.StringIO()
 df.info(buf=buffer)
 info = buffer.getvalue()
@@ -47,7 +45,7 @@ st.text(info)
 
 st.write()
 
-st.markdown("Find the dimension of dataframe")
+st.subheader("Find the dimension of dataframe")
 shape = df.shape
 st.write("Size of dataset :",shape)
 
@@ -106,9 +104,10 @@ st.dataframe(clean_df.head())
 
 
 # Confirmation Datatypes
-st.markdown("Checking data types")
-st.dataframe(clean_df.dtypes.astype(str)) #checking data types
+st.subheader("Checking data types")
 st.markdown("To check whether all categorical data have changed to numerical data")
+
+st.dataframe(clean_df.dtypes.astype(str)) #checking data types
 
 # Correlations Heatmap after Preprocessing Data
 
@@ -122,9 +121,10 @@ st.markdown("Now, all classes have been have been ready for analyze")
 # Correlation value against Desicion
 
 st.subheader("Correlation value against Desicion")
+st.markdown("Discover the correlation between Decision and others classes")
+
 cleancorr = clean_df.corr().round(3)["Decision"]
 st.dataframe(cleancorr.astype(str))
-st.markdown("Discover the correlation between Decision and others classes")
 
 
 # Spilt dataset
@@ -132,6 +132,7 @@ st.markdown("Discover the correlation between Decision and others classes")
 # For this example, we use the mass, width, and height features of each fruit instance
 X = clean_df.drop("Decision", axis = 1)    # big X represents independent variable
 y = clean_df["Decision"]                   # small y represents dependent variable
+st.markdown("By default Train Set = 70%, Test Set = 30%")
 
 st.markdown("**Independent Variables:**")
 st.write(X)
@@ -140,11 +141,6 @@ st.write(y)
 
 # Prepare X_train, X_test, y_train, y_test
 # Random State = 1
-
-st.markdown("By default")
-st.markdown("Train Set = 70%")
-st.markdown("Test Set = 30%")
-######################################test_size#####################################
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = train_ratio, random_state = 1)
 
 # Feature Selection for cluster process on K-Means
@@ -296,7 +292,6 @@ st.markdown("From the line graph above, we can see that the elbow point is at 5.
 st.write("**Adjust the **Number of Clusters (k)** in the sidebar and investigate the scatter plot again.**")
 
 
-######################################clus_k###################################
 # 5 is select as the number of clusters
 km = KMeans(n_clusters = k_cluster, random_state = 1)
 st.write(km.fit(km_data))
