@@ -17,15 +17,15 @@ from sklearn.metrics import confusion_matrix
 st.title("Question 3: Loan Application Modelling")
 
 ############################################################User sidebar#######################
-# st.sidebar.header("User Input")
-# train_ratio = st.sidebar.slider("Training Set Ratio", min_value = 0.1, max_value = 1.0, value = 0.7, step = 0.1)
-# clus_k = st.sidebar.slider("Number of Clusters (k)", min_value = 1, max_value = 10, value = 5, step = 1)
-# data = {"train_ratio" : train_ratio,
-#         "clus_k" : clus_k}
+st.sidebar.header("User Input")
+train_ratio = st.sidebar.slider("Training Set Ratio", min_value = 0.1, max_value = 1.0, value = 0.7, step = 0.1)
+k_cluster = st.sidebar.slider("Number of Clusters (k)", min_value = 1, max_value = 10, value = 5, step = 1)
+data = {"train_ratio" : train_ratio,
+         "clus_k" : k_cluster}
         
 
-# test_ratio = round((1 - train_ratio), 1)
-# clus_k = int(clus_k)
+test_ratio = round((1 - train_ratio), 1)
+k_cluster = int(k_cluster)
 ############################################################User sidebar#######################
 
 
@@ -145,7 +145,7 @@ st.markdown("By default")
 st.markdown("Train Set = 70%")
 st.markdown("Test Set = 30%")
 ######################################test_size#####################################
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = train_ratio, random_state = 1)
 
 # Feature Selection for cluster process on K-Means
 StandardScaler = StandardScaler()
@@ -298,7 +298,7 @@ st.write("**Adjust the **Number of Clusters (k)** in the sidebar and investigate
 
 ######################################clus_k###################################
 # 5 is select as the number of clusters
-km = KMeans(n_clusters = 5, random_state = 1)
+km = KMeans(n_clusters = k_cluster, random_state = 1)
 st.write(km.fit(km_data))
 
 # merging data with labeling for visualize
